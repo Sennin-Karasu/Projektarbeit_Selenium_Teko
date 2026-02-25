@@ -96,7 +96,7 @@ def cmd_list_cookies():
 def main():
     if len(sys.argv) < 2:
         show_help()
-        return
+        sys.exit(2)
 
     command = sys.argv[1]
 
@@ -114,9 +114,9 @@ def main():
         cmd_list_cookies()
 
     else:
-        print(f"Unbekannter Befehl: {command}")
+        print(f"FEHLER: Unbekannter Befehl '{command}'")
         show_help()
-
+        sys.exit(2)
 
 if __name__ == "__main__":
     main()
