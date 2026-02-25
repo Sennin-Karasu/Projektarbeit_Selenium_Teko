@@ -12,16 +12,12 @@ Diese Features gehören zum Minimalsystem und wurden implementiert:
 
 ## Zusatzfeatures (für zusätzliche Punkte)
 
-| Feature                                        | Implementiert | Datei | Zeilennummern          | Kurzbeschreibung |
-|------------------------------------------------|---|---|------------------------|---|
-| Optionale URL als Parameter für `title`        | Ja | selenium_tester.py | ca. 22-32, ca. 103-106 | `title` verwendet Standard-URL oder eine per CLI übergebene URL (`python selenium_tester.py title https://example.com`) |
+| Feature | Implementiert | Datei | Zeilennummern | Kurzbeschreibung |
+| --- | --- | --- | --- | --- |
+| Optionale URL als Parameter für `title` | Ja | selenium_tester.py | ca. 22-32, ca. 103-106 | `title` verwendet Standard-URL oder eine per CLI übergebene URL (`python selenium_tester.py title https://example.com`) |
 | Client-Fehlerbehandlung bei ungültigem Command | Ja | selenium_tester.py | 86-110 | Ungültige Befehle werden abgefangen, Help angezeigt und Exit-Code 2 zurückgegeben |
-|                                                |    |              |                        |                                                                                                                   |
-|                                                |    |              |                        |                                                                                                                   |
-|                                                |    |              |                        |                                                                                                                   |
-|                                                |    |              |                        |                                                                                                                   |
-| Fehlerbehandlung bei ungültiger Website        | Ja | selenium_tester.py | xx-yy | Website-Ladefehler werden abgefangen, Fehlermeldung ausgegeben und Exit-Code 1 gesetzt |
-| Dynamische GET-Parameter über Client           | Ja | selenium_tester.py | xx-yy | GET-Parameter können als CLI-Argument übergeben werden (`python selenium_tester.py get name=max`) |
+| Fehlerbehandlung bei ungültiger Website | Ja | selenium_tester.py | xx-yy | Website-Ladefehler werden abgefangen, Fehlermeldung ausgegeben und Exit-Code 1 gesetzt |
+| Dynamische GET-Parameter über Client | Ja | selenium_tester.py | xx-yy | GET-Parameter können als CLI-Argument übergeben werden (`python selenium_tester.py get name=max`) |
 
 Hinweis: Ohne URL wird weiterhin die Standard-Testseite `https://the-internet.herokuapp.com/` verwendet.
 
