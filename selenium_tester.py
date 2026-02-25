@@ -7,6 +7,9 @@ import importlib.util
 # Standard library: run shell commands (used for pip install)
 import subprocess
 
+# Standard library: pause execution for a given number of seconds
+import time
+
 
 def check_selenium():
     # Check if selenium is already installed
@@ -64,6 +67,7 @@ def show_help():
     print("  get [key=value]  Sendet einen GET-Request, optional mit Parametern")
     print("  post             Füllt das Login-Formular aus und sendet es ab")
     print("  list-cookies     Zeigt alle Cookies der Standardseite an")
+    print("  keypresses [text] [url]  Sucht ein Texteingabefeld und tippt den Text ein (Standard: 'Hallo Welt')")
     print()
     print("Beispiele:")
     print("  python selenium_tester.py title")
@@ -72,6 +76,8 @@ def show_help():
     print(f"  python selenium_tester.py get name=max   ->  {BASE_URL}?name=max")
     print("  python selenium_tester.py post")
     print("  python selenium_tester.py list-cookies")
+    print("  python selenium_tester.py keypresses Hallo")
+    print("  python selenium_tester.py keypresses Hallo https://example.com")
     print()
     print("Exit-Codes:")
     print("  0  Erfolg")
@@ -201,6 +207,47 @@ def cmd_list_cookies():
         driver.quit()
 
 
+def cmd_keypresses(text=None, url=None):
+    # Use default text if none was provided
+    if text is None:
+        text = "Hallo Welt"
+
+    # Use the key presses demo page if no URL is given
+    if url is None:
+        url = "https://the-internet.herokuapp.com/key_presses"
+
+    # Open the browser
+    driver = create_driver()
+    try:
+        # Load the page
+        driver.get(url)
+
+        # Search for a text input field on the page
+        input_fields = driver.find_elements(By.CSS_SELECTOR, "input[type='text']")
+
+        # Exit if no input field was found on the page
+        if not input_fields:
+            print("FEHLER: Kein Texteingabefeld auf der Seite gefunden.")
+            sys.exit(1)
+
+        # Type the given text into the first input field found
+        input_fields[0].send_keys(text)
+        print("Text eingegeben:", text)
+
+        # Wait so the user can see the result in the browser before it closes
+        time.sleep(10)
+
+    except WebDriverException as error:
+        # Page could not be loaded — print error and exit with code 1
+        print(f"FEHLER: Website konnte nicht geladen werden: {url}")
+        print("Details:", str(error).split("\n")[0])
+        sys.exit(1)
+
+    finally:
+        # Always close the browser, even if an error occurred
+        driver.quit()
+
+
 def main():
     # Show help if no command was given
     if len(sys.argv) < 2:
@@ -225,6 +272,13 @@ def main():
 
     elif command == "list-cookies":
         cmd_list_cookies()
+
+    elif command == "keypresses":
+        # Use second argument as text if provided, otherwise use default
+        text = sys.argv[2] if len(sys.argv) >= 3 else None
+        # Use optional third argument as URL
+        url = sys.argv[3] if len(sys.argv) >= 4 else None
+        cmd_keypresses(text, url)
 
     else:
         # Unknown command — show error, help, and exit with code 2
