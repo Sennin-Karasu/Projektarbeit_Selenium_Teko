@@ -12,10 +12,14 @@ Minimalsystem zur Demonstration von HTTP-Konzepten mit Selenium als Browser-Werk
 - Python mind. 3.11
 - Konsole
 
-## Befehle:
+## Befehle Minamalprojekt:
 python myproject.py title  
 python myproject.py get  
 python myproject.py post  
 python myproject.py list-cookies  
+
+## Befehle Features 
+python myproject.py title https://example.com  
+
 
 Hinweis: Selenium wird als Browser-Werkzeug verwendet
