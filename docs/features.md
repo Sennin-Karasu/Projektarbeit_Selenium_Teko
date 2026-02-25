@@ -1,13 +1,14 @@
 # Feature-Dokumentation
 
 ## Minimalsystem (Pflicht)
+
 Diese Features gehören zum Minimalsystem und wurden implementiert:
 
 - `title` (Selenium: Webseite laden und Titel anzeigen)
 - `get` (GET mit Variablen)
 - `post` (POST / Formular absenden)
 - `list-cookies` (Cookies anzeigen)
-- minimale Dokumentation > Readme.md 
+- minimale Dokumentation > Readme.md
 
 ## Zusatzfeatures (für zusätzliche Punkte)
 
@@ -22,9 +23,8 @@ Diese Features gehören zum Minimalsystem und wurden implementiert:
 | Fehlerbehandlung bei ungültiger Website        | Ja | myproject.py | xx-yy | Website-Ladefehler werden abgefangen, Fehlermeldung ausgegeben und Exit-Code 1 gesetzt |
 | Dynamische GET-Parameter über Client           | Ja | myproject.py | xx-yy | GET-Parameter können als CLI-Argument übergeben werden (`python myproject.py get name=max`) |
 
-
-
 Hinweis: Ohne URL wird weiterhin die Standard-Testseite `https://the-internet.herokuapp.com/` verwendet.
 
 ## Verwendete Testseite
-- https://the-internet.herokuapp.com/
+
+- <https://the-internet.herokuapp.com/>
