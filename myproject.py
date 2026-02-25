@@ -1,13 +1,14 @@
 import sys
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
 
 BASE_URL = "https://the-internet.herokuapp.com/"
 
 
 def show_help():
     print("Verwendung:")
-    print("  python myproject.py title")
+    print("  python myproject.py title [url]")
     print("  python myproject.py get")
     print("  python myproject.py post")
     print("  python myproject.py list-cookies")
@@ -15,16 +16,20 @@ def show_help():
 
 def create_driver():
     options = Options()
-    # Später optional aktivieren, wenn ihr ohne Browserfenster wollt:
+    # Optional:
     # options.add_argument("--headless=new")
     driver = webdriver.Chrome(options=options)
     return driver
 
 
-def cmd_title():
+def cmd_title(url=None):
+    if url is None:
+        url = BASE_URL
+
     driver = create_driver()
     try:
-        driver.get(BASE_URL)
+        driver.get(url)
+        print("URL:", url)
         print("Titel:", driver.title)
     finally:
         driver.quit()
@@ -43,8 +48,6 @@ def cmd_get():
         driver.quit()
 
 
-from selenium.webdriver.common.by import By
-
 def cmd_post():
     driver = create_driver()
     try:
@@ -61,7 +64,7 @@ def cmd_post():
         print("Aktuelle URL:", driver.current_url)
         print("Titel:", driver.title)
 
-        # Optional: Erfolgsmeldung anzeigen
+        # Erfolgsmeldung anzeigen
         flash = driver.find_element(By.ID, "flash").text
         print("Antwort:", flash.strip())
 
@@ -89,6 +92,7 @@ def cmd_list_cookies():
     finally:
         driver.quit()
 
+
 def main():
     if len(sys.argv) < 2:
         show_help()
@@ -97,13 +101,18 @@ def main():
     command = sys.argv[1]
 
     if command == "title":
-        cmd_title()
+        url = sys.argv[2] if len(sys.argv) >= 3 else None
+        cmd_title(url)
+
     elif command == "get":
         cmd_get()
+
     elif command == "post":
         cmd_post()
+
     elif command == "list-cookies":
         cmd_list_cookies()
+
     else:
         print(f"Unbekannter Befehl: {command}")
         show_help()

@@ -1,17 +1,23 @@
-
-
 # Feature-Dokumentation
-Hier wereden unsere features sauber gelistet mit allen nötigen Informationen. 
 
-## Tabellarische Ansicht 
+## Minimalsystem (Pflicht)
+Diese Features gehören zum Minimalsystem und wurden implementiert:
 
-| Feature | Implementiert | Datei | Zeilennummern | Kurzbeschreibung |
-|---|---|---|---|---|
-| CLI-Parameter (`title/get/post/list-cookies`) | Ja | myproject.py | xx-yy | Auswahl des Befehls über `sys.argv` |
-| `title` (Selenium Scraping) | Ja | myproject.py | xx-yy | Webseite laden und Seitentitel anzeigen |
-| `get` (GET mit Variablen) | Ja | myproject.py | xx-yy | URL mit Query-Parametern laden |
-| `post` (Form submission) | Ja | myproject.py | xx-yy | Login-Formular ausfüllen und absenden |
-| `list-cookies` | Ja | myproject.py | xx-yy | Browser-Cookies mit Selenium anzeigen |
+- `title` (Selenium: Webseite laden und Titel anzeigen)
+- `get` (GET mit Variablen)
+- `post` (POST / Formular absenden)
+- `list-cookies` (Cookies anzeigen)
+- minimale Dokumentation
+
+## Zusatzfeatures (für zusätzliche Punkte)
+
+| Feature | Implementiert | Datei | Zeilennummern          | Kurzbeschreibung |
+|---|---|---|------------------------|---|
+| Optionale URL als Parameter für `title` | Ja | myproject.py | ca. 22-32, ca. 103-106 | `title` verwendet Standard-URL oder eine per CLI übergebene URL (`python myproject.py title https://example.com`) ||
+
+
+
+Hinweis: Ohne URL wird weiterhin die Standard-Testseite `https://the-internet.herokuapp.com/` verwendet.
 
 ## Verwendete Testseite
 - https://the-internet.herokuapp.com/
