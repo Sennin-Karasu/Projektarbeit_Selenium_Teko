@@ -58,10 +58,10 @@ BASE_URL = "https://the-internet.herokuapp.com/"
 def show_help():
     # Print all available commands to the console
     print("Verwendung:")
-    print("  python myproject.py title [url]")
-    print("  python myproject.py get")
-    print("  python myproject.py post")
-    print("  python myproject.py list-cookies")
+    print("  python selenium_tester.py title [url]")
+    print("  python selenium_tester.py get")
+    print("  python selenium_tester.py post")
+    print("  python selenium_tester.py list-cookies")
 
 
 def create_driver():
