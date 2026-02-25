@@ -56,12 +56,27 @@ BASE_URL = "https://the-internet.herokuapp.com/"
 
 
 def show_help():
-    # Print all available commands to the console
-    print("Verwendung:")
-    print("  python selenium_tester.py title [url]")
+    # Print all available commands with descriptions and examples
+    print("Verwendung: python selenium_tester.py <befehl> [optionen]")
+    print()
+    print("Befehle:")
+    print("  title [url]      Lädt eine Webseite und zeigt den Titel an")
+    print("  get [key=value]  Sendet einen GET-Request, optional mit Parametern")
+    print("  post             Füllt das Login-Formular aus und sendet es ab")
+    print("  list-cookies     Zeigt alle Cookies der Standardseite an")
+    print()
+    print("Beispiele:")
+    print("  python selenium_tester.py title")
+    print("  python selenium_tester.py title https://example.com")
     print("  python selenium_tester.py get")
+    print(f"  python selenium_tester.py get name=max   ->  {BASE_URL}?name=max")
     print("  python selenium_tester.py post")
     print("  python selenium_tester.py list-cookies")
+    print()
+    print("Exit-Codes:")
+    print("  0  Erfolg")
+    print("  1  Website konnte nicht geladen werden")
+    print("  2  Unbekannter Befehl oder fehlende Argumente")
 
 
 def create_driver():
