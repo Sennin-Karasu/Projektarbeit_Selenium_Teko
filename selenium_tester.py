@@ -105,10 +105,10 @@ def cmd_title(url=None):
         print("URL:", url)
         print("Titel:", driver.title)
 
-    except WebDriverException as e:
+    except WebDriverException as error:
         # Page could not be loaded — print error and exit with code 1
         print(f"FEHLER: Website konnte nicht geladen werden: {url}")
-        print("Details:", str(e).split("\n")[0])
+        print("Details:", str(error).split("\n")[0])
         sys.exit(1)
 
     finally:
@@ -164,8 +164,8 @@ def cmd_post():
         print("Titel:", driver.title)
 
         # Read and print the flash message shown after login
-        flash = driver.find_element(By.ID, "flash").text
-        print("Antwort:", flash.strip())
+        flash_message = driver.find_element(By.ID, "flash").text
+        print("Antwort:", flash_message.strip())
 
     finally:
         # Always close the browser, even if an error occurred
