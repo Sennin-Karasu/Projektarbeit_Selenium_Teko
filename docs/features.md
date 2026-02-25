@@ -19,7 +19,8 @@ Diese Features gehören zum Minimalsystem und wurden implementiert:
 |                                                |    |              |                        |                                                                                                                   |
 |                                                |    |              |                        |                                                                                                                   |
 |                                                |    |              |                        |                                                                                                                   |
-| Fehlerbehandlung bei ungültiger Website | Ja | myproject.py | xx-yy | Website-Ladefehler werden abgefangen, Fehlermeldung ausgegeben und Exit-Code 1 gesetzt |
+| Fehlerbehandlung bei ungültiger Website        | Ja | myproject.py | xx-yy | Website-Ladefehler werden abgefangen, Fehlermeldung ausgegeben und Exit-Code 1 gesetzt |
+| Dynamische GET-Parameter über Client           | Ja | myproject.py | xx-yy | GET-Parameter können als CLI-Argument übergeben werden (`python myproject.py get name=max`) |
 
 
 

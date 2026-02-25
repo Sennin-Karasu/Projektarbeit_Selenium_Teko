@@ -42,15 +42,24 @@ def cmd_title(url=None):
     finally:
         driver.quit()
 
-def cmd_get():
+def cmd_get(params=None):
     driver = create_driver()
     try:
-        url = BASE_URL + "?name=max&kurs=http"
-        driver.get(url)
+        if params:
+            url = BASE_URL + "?" + params
+        else:
+            url = BASE_URL
+
+        try:
+            driver.get(url)
+        except Exception as e:
+            print(f"FEHLER: Website konnte nicht geladen werden: {url}")
+            sys.exit(1)
 
         print("GET geladen")
-        print("Aktuelle URL:", driver.current_url)
+        print("URL:", driver.current_url)
         print("Titel:", driver.title)
+
     finally:
         driver.quit()
 
@@ -111,8 +120,12 @@ def main():
         url = sys.argv[2] if len(sys.argv) >= 3 else None
         cmd_title(url)
 
+
     elif command == "get":
-        cmd_get()
+
+        params = sys.argv[2] if len(sys.argv) >= 3 else None
+
+        cmd_get(params)
 
     elif command == "post":
         cmd_post()
