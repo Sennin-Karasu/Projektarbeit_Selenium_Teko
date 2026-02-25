@@ -19,6 +19,7 @@ Diese Features gehören zum Minimalsystem und wurden implementiert:
 |                                                |    |              |                        |                                                                                                                   |
 |                                                |    |              |                        |                                                                                                                   |
 |                                                |    |              |                        |                                                                                                                   |
+| Fehlerbehandlung bei ungültiger Website | Ja | myproject.py | xx-yy | Website-Ladefehler werden abgefangen, Fehlermeldung ausgegeben und Exit-Code 1 gesetzt |
 
 
 

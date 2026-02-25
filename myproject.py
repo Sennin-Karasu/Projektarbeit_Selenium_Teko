@@ -2,6 +2,7 @@ import sys
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import WebDriverException
 
 BASE_URL = "https://the-internet.herokuapp.com/"
 
@@ -28,12 +29,18 @@ def cmd_title(url=None):
 
     driver = create_driver()
     try:
-        driver.get(url)
+        try:
+            driver.get(url)
+        except WebDriverException as e:
+            print(f"FEHLER: Website konnte nicht geladen werden: {url}")
+            print("Details:", str(e).split("\n")[0])
+            sys.exit(1)
+
         print("URL:", url)
         print("Titel:", driver.title)
+
     finally:
         driver.quit()
-
 
 def cmd_get():
     driver = create_driver()
