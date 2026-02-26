@@ -67,6 +67,7 @@ def show_help():
     print("  get [key=value]  Sendet einen GET-Request, optional mit Parametern")
     print("  post             Füllt das Login-Formular aus und sendet es ab")
     print("  list-cookies     Zeigt alle Cookies der Standardseite an")
+    print("  checkbox [url]   Zeigt an, welche Checkboxen auf der Seite ausgewählt sind")
     print("  keypress [text] [url]  Sucht ein Texteingabefeld und tippt den Text ein (Standard: 'Hallo Welt')")
     print()
     print("Beispiele:")
@@ -76,6 +77,7 @@ def show_help():
     print(f"  python selenium_tester.py get name=max   ->  {BASE_URL}?name=max")
     print("  python selenium_tester.py post")
     print("  python selenium_tester.py list-cookies")
+    print("  python selenium_tester.py checkbox")
     print("  python selenium_tester.py keypress Hallo")
     print("  python selenium_tester.py keypress Hallo https://example.com")
     print()
@@ -207,6 +209,48 @@ def cmd_list_cookies():
         driver.quit()
 
 
+def cmd_checkbox(url=None):
+    # Use the checkboxes demo page if no URL is given
+    if url is None:
+        url = "https://the-internet.herokuapp.com/checkboxes"
+
+    # Open the browser
+    driver = create_driver()
+    try:
+        # Load the page
+        driver.get(url)
+
+        # Find all checkbox input elements on the page
+        checkboxes = driver.find_elements(By.CSS_SELECTOR, "input[type='checkbox']")
+
+        # Exit if no checkboxes were found on the page
+        if not checkboxes:
+            print("Keine Checkboxen auf der Seite gefunden.")
+            return
+
+        # Find all checkboxes that are currently checked
+        checked = [cb for cb in checkboxes if cb.is_selected()]
+
+        # Print how many checkboxes exist and how many are checked
+        print(f"Checkboxen gefunden: {len(checkboxes)}")
+        print(f"Ausgewählt: {len(checked)}")
+
+        # Print the index of each checked checkbox (1-based for readability)
+        for cb in checked:
+            index = checkboxes.index(cb) + 1
+            print(f"  Checkbox {index}: ausgewählt")
+
+    except WebDriverException as error:
+        # Page could not be loaded — print error and exit with code 1
+        print(f"FEHLER: Website konnte nicht geladen werden: {url}")
+        print("Details:", str(error).split("\n")[0])
+        sys.exit(1)
+
+    finally:
+        # Always close the browser, even if an error occurred
+        driver.quit()
+
+
 def cmd_keypress(text=None, url=None):
     # Use default text if none was provided
     if text is None:
@@ -272,6 +316,11 @@ def main():
 
     elif command == "list-cookies":
         cmd_list_cookies()
+
+    elif command == "checkbox":
+        # Use the second argument as URL if provided, otherwise use None (default URL)
+        url = sys.argv[2] if len(sys.argv) >= 3 else None
+        cmd_checkbox(url)
 
     elif command == "keypress":
         # Use second argument as text if provided, otherwise use default
