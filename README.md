@@ -2,7 +2,7 @@
 
 ## Beschreibung
 
-Minimalsystem zur Demonstration von HTTP-Konzepten mit Selenium als Browser-Werkzeug:
+Demonstration von HTTP-Konzepten mit Selenium als Browser-Werkzeug. Weitere Features sind in [docs/features.md](docs/features.md) dokumentiert.
 
 - Webseite laden und Titel anzeigen (Scraping)
 - GET Request mit Variablen
@@ -13,17 +13,13 @@ Minimalsystem zur Demonstration von HTTP-Konzepten mit Selenium als Browser-Werk
 
 - (pip install -r requirements.txt)
 - Python mind. 3.11
-- Konsole
 
-## Befehle Minamalprojekt
+## Beispielbefehle
 
+```bash
+python selenium_tester.py          # Alle Befehle anzeigen
 python selenium_tester.py title
-python selenium_tester.py get
-python selenium_tester.py post
+python selenium_tester.py get name=max
 python selenium_tester.py list-cookies
-
-## Befehle Features
-
-python selenium_tester.py title <https://example.com>
-
-Hinweis: Selenium wird als Browser-Werkzeug verwendet
+python selenium_tester.py keypress Hallo
+```
