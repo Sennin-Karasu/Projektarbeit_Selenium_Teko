@@ -2,7 +2,9 @@
 
 ## Beschreibung
 
-Demonstration von HTTP-Konzepten mit Selenium als Browser-Werkzeug. Weitere Features sind in [docs/features.md](docs/features.md) dokumentiert.
+Demonstration von HTTP-Konzepten mit Selenium als Browser-Werkzeug. Standardmäßig wird `https://the-internet.herokuapp.com/` als Zielseite verwendet — alle Befehle akzeptieren eine optionale URL als Parameter. Weitere Features sind in [docs/features.md](docs/features.md) dokumentiert.
+
+**Grundfeatures:**
 
 - Webseite laden und Titel anzeigen (Scraping)
 - GET Request mit Variablen
@@ -22,4 +24,5 @@ python selenium_tester.py title
 python selenium_tester.py get name=max
 python selenium_tester.py list-cookies
 python selenium_tester.py keypress Hallo
+python selenium_tester.py slider
 ```

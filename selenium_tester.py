@@ -51,6 +51,10 @@ from selenium.webdriver.chrome.options import Options
 # Selenium: find elements on the page by ID, CSS, etc.
 from selenium.webdriver.common.by import By
 
+# Selenium: simulate keyboard and mouse actions
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
+
 # Selenium: error that occurs when a page cannot be loaded
 from selenium.common.exceptions import WebDriverException
 
@@ -65,10 +69,11 @@ def show_help():
     print("Befehle:")
     print("  title [url]      Lädt eine Webseite und zeigt den Titel an")
     print("  get [key=value]  Sendet einen GET-Request, optional mit Parametern")
-    print("  post             Füllt das Login-Formular aus und sendet es ab")
-    print("  list-cookies     Zeigt alle Cookies der Standardseite an")
+    print("  post [url]       Füllt das Login-Formular aus und sendet es ab")
+    print("  list-cookies [url]  Zeigt alle Cookies der Seite an")
     print("  checkbox [url]   Zeigt an, welche Checkboxen auf der Seite ausgewählt sind")
     print("  keypress [text] [url]  Sucht ein Texteingabefeld und tippt den Text ein (Standard: 'Hallo Welt')")
+    print("  slider [url]     Bewegt den Slider auf den Maximalwert und gibt ihn aus")
     print()
     print("Beispiele:")
     print("  python selenium_tester.py title")
@@ -80,6 +85,7 @@ def show_help():
     print("  python selenium_tester.py checkbox")
     print("  python selenium_tester.py keypress Hallo")
     print("  python selenium_tester.py keypress Hallo https://example.com")
+    print("  python selenium_tester.py slider")
     print()
     print("Exit-Codes:")
     print("  0  Erfolg")
@@ -152,12 +158,16 @@ def cmd_get(params=None):
         driver.quit()
 
 
-def cmd_post():
+def cmd_post(url=None):
+    # Use the login page if no URL is given
+    if url is None:
+        url = BASE_URL + "login"
+
     # Open the browser
     driver = create_driver()
     try:
-        # Navigate to the login page
-        driver.get(BASE_URL + "login")
+        # Load the page
+        driver.get(url)
 
         # Fill in the username and password fields
         driver.find_element(By.ID, "username").send_keys("tomsmith")
@@ -180,12 +190,16 @@ def cmd_post():
         driver.quit()
 
 
-def cmd_list_cookies():
+def cmd_list_cookies(url=None):
+    # Use the default base page if no URL is given
+    if url is None:
+        url = BASE_URL
+
     # Open the browser
     driver = create_driver()
     try:
         # Load the page so cookies are set
-        driver.get(BASE_URL)
+        driver.get(url)
 
         # Get all cookies from the browser for this page
         cookies = driver.get_cookies()
@@ -212,7 +226,7 @@ def cmd_list_cookies():
 def cmd_checkbox(url=None):
     # Use the checkboxes demo page if no URL is given
     if url is None:
-        url = "https://the-internet.herokuapp.com/checkboxes"
+        url = BASE_URL + "checkboxes"
 
     # Open the browser
     driver = create_driver()
@@ -258,7 +272,7 @@ def cmd_keypress(text=None, url=None):
 
     # Use the key presses demo page if no URL is given
     if url is None:
-        url = "https://the-internet.herokuapp.com/key_presses"
+        url = BASE_URL + "key_presses"
 
     # Open the browser
     driver = create_driver()
@@ -277,6 +291,42 @@ def cmd_keypress(text=None, url=None):
         # Type the given text into the first input field found
         input_fields[0].send_keys(text)
         print("Text eingegeben:", text)
+
+        # Wait so the user can see the result in the browser before it closes
+        time.sleep(10)
+
+    except WebDriverException as error:
+        # Page could not be loaded — print error and exit with code 1
+        print(f"FEHLER: Website konnte nicht geladen werden: {url}")
+        print("Details:", str(error).split("\n")[0])
+        sys.exit(1)
+
+    finally:
+        # Always close the browser, even if an error occurred
+        driver.quit()
+
+
+def cmd_slider(url=None):
+    # Use the horizontal slider demo page if no URL is given
+    if url is None:
+        url = BASE_URL + "horizontal_slider"
+
+    # Open the browser
+    driver = create_driver()
+    try:
+        # Load the page
+        driver.get(url)
+
+        # Find the range input (the slider element)
+        slider = driver.find_element(By.CSS_SELECTOR, "input[type='range']")
+
+        # Click to focus the slider, then press End to jump to the maximum value
+        ActionChains(driver).click(slider).send_keys(Keys.END).perform()
+
+        # Read the current value displayed next to the slider
+        value = driver.find_element(By.ID, "range").text
+        print("Slider auf Maximum gesetzt")
+        print("Wert:", value)
 
         # Wait so the user can see the result in the browser before it closes
         time.sleep(10)
@@ -312,10 +362,14 @@ def main():
         cmd_get(params)
 
     elif command == "post":
-        cmd_post()
+        # Use the second argument as URL if provided, otherwise use None (default URL)
+        url = sys.argv[2] if len(sys.argv) >= 3 else None
+        cmd_post(url)
 
     elif command == "list-cookies":
-        cmd_list_cookies()
+        # Use the second argument as URL if provided, otherwise use None (default URL)
+        url = sys.argv[2] if len(sys.argv) >= 3 else None
+        cmd_list_cookies(url)
 
     elif command == "checkbox":
         # Use the second argument as URL if provided, otherwise use None (default URL)
@@ -328,6 +382,11 @@ def main():
         # Use optional third argument as URL
         url = sys.argv[3] if len(sys.argv) >= 4 else None
         cmd_keypress(text, url)
+
+    elif command == "slider":
+        # Use the second argument as URL if provided, otherwise use None (default URL)
+        url = sys.argv[2] if len(sys.argv) >= 3 else None
+        cmd_slider(url)
 
     else:
         # Unknown command — show error, help, and exit with code 2
