@@ -67,7 +67,7 @@ def show_help():
     print("  get [key=value]  Sendet einen GET-Request, optional mit Parametern")
     print("  post             Füllt das Login-Formular aus und sendet es ab")
     print("  list-cookies     Zeigt alle Cookies der Standardseite an")
-    print("  keypresses [text] [url]  Sucht ein Texteingabefeld und tippt den Text ein (Standard: 'Hallo Welt')")
+    print("  keypress [text] [url]  Sucht ein Texteingabefeld und tippt den Text ein (Standard: 'Hallo Welt')")
     print()
     print("Beispiele:")
     print("  python selenium_tester.py title")
@@ -76,8 +76,8 @@ def show_help():
     print(f"  python selenium_tester.py get name=max   ->  {BASE_URL}?name=max")
     print("  python selenium_tester.py post")
     print("  python selenium_tester.py list-cookies")
-    print("  python selenium_tester.py keypresses Hallo")
-    print("  python selenium_tester.py keypresses Hallo https://example.com")
+    print("  python selenium_tester.py keypress Hallo")
+    print("  python selenium_tester.py keypress Hallo https://example.com")
     print()
     print("Exit-Codes:")
     print("  0  Erfolg")
@@ -207,7 +207,7 @@ def cmd_list_cookies():
         driver.quit()
 
 
-def cmd_keypresses(text=None, url=None):
+def cmd_keypress(text=None, url=None):
     # Use default text if none was provided
     if text is None:
         text = "Hallo Welt"
@@ -222,8 +222,8 @@ def cmd_keypresses(text=None, url=None):
         # Load the page
         driver.get(url)
 
-        # Search for a text input field on the page
-        input_fields = driver.find_elements(By.CSS_SELECTOR, "input[type='text']")
+        # Search for a text or search input field on the page (covers type='text' and type='search')
+        input_fields = driver.find_elements(By.CSS_SELECTOR, "input[type='text'], input[type='search']")
 
         # Exit if no input field was found on the page
         if not input_fields:
@@ -273,12 +273,12 @@ def main():
     elif command == "list-cookies":
         cmd_list_cookies()
 
-    elif command == "keypresses":
+    elif command == "keypress":
         # Use second argument as text if provided, otherwise use default
         text = sys.argv[2] if len(sys.argv) >= 3 else None
         # Use optional third argument as URL
         url = sys.argv[3] if len(sys.argv) >= 4 else None
-        cmd_keypresses(text, url)
+        cmd_keypress(text, url)
 
     else:
         # Unknown command — show error, help, and exit with code 2

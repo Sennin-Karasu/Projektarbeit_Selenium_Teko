@@ -18,7 +18,7 @@ Diese Features gehören zum Minimalsystem und wurden implementiert:
 | Client-Fehlerbehandlung bei ungültigem Command | Ja | selenium_tester.py | 288-292 | Ungültige Befehle werden abgefangen, Help angezeigt und Exit-Code 2 zurückgegeben |
 | Fehlerbehandlung bei ungültiger Website | Ja | selenium_tester.py | 114-118, 143-146 | Website-Ladefehler werden abgefangen, Fehlermeldung ausgegeben und Exit-Code 1 gesetzt |
 | Dynamische GET-Parameter über Client | Ja | selenium_tester.py | 125-130, 272 | GET-Parameter können als CLI-Argument übergeben werden (`python selenium_tester.py get name=max`) |
-| Texteingabe in Formularfeld (`keypresses`) | Ja | selenium_tester.py | 210-249 | Sucht erstes `input[type='text']` auf der Seite und tippt den per CLI übergebenen Text ein |
+| Texteingabe in Formularfeld (`keypress`) | Ja | selenium_tester.py | 210-249 | Sucht erstes `input[type='text']` oder `input[type='search']` auf der Seite und tippt den per CLI übergebenen Text ein |
 
 Hinweis: Ohne URL wird weiterhin die Standard-Testseite `https://the-internet.herokuapp.com/` verwendet.
 
