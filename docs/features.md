@@ -15,6 +15,7 @@ Standardmäßig verwendet das Tool `https://the-internet.herokuapp.com/` als Zie
 
 | Feature | Zeilennummern | Kurzbeschreibung |
 | --- | --- | --- |
+| Automatische Selenium-Installation (`check_selenium`) | 14-40 | Prüft beim Start ob Selenium installiert ist. Fragt den Nutzer und installiert es bei Bedarf automatisch per pip |
 | Optionale URL als Parameter | alle Befehle | Jeder Befehl verwendet eine Standard-URL oder eine per CLI übergebene URL (`python selenium_tester.py title https://example.com`) |
 | Client-Fehlerbehandlung bei ungültigem Command | 288-292 | Ungültige Befehle werden abgefangen, Help angezeigt und Exit-Code 2 zurückgegeben |
 | Fehlerbehandlung bei ungültiger Website | 114-118, 143-146 | Website-Ladefehler werden abgefangen, Fehlermeldung ausgegeben und Exit-Code 1 gesetzt |
