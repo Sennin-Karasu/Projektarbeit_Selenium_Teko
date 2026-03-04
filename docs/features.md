@@ -23,7 +23,3 @@ Standardmäßig verwendet das Tool `https://the-internet.herokuapp.com/` als Zie
 | Texteingabe in Formularfeld (`keypress`) | 252-291 | Sucht erstes `input[type='text']` oder `input[type='search']` auf der Seite und tippt den per CLI übergebenen Text ein |
 | Checkboxen auslesen (`checkbox`) | 210-249 | Findet alle `input[type='checkbox']` auf der Seite und gibt aus, welche ausgewählt sind; optionale URL als Argument |
 | Slider auf Maximum (`slider`) | 295-325 | Bewegt den horizontalen Slider per Tastendruck auf den Maximalwert und gibt den angezeigten Wert aus |
-
-## Verwendete Testseite
-
-- <https://the-internet.herokuapp.com/>

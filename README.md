@@ -19,10 +19,14 @@ Demonstration von HTTP-Konzepten mit Selenium als Browser-Werkzeug. Standardmä�
 ## Beispielbefehle
 
 ```bash
-python selenium_tester.py          # Alle Befehle anzeigen
-python selenium_tester.py title
-python selenium_tester.py get name=max
-python selenium_tester.py list-cookies
-python selenium_tester.py keypress Hallo
-python selenium_tester.py slider
+python selenium_tester.py                        # Alle Befehle anzeigen
+python selenium_tester.py title                  # Titel der Standardseite anzeigen
+python selenium_tester.py title https://example.com  # Titel einer eigenen URL anzeigen
+python selenium_tester.py get                    # GET-Request an die Standardseite
+python selenium_tester.py get name=max           # GET-Request mit Query-Parameter
+python selenium_tester.py post                   # Login-Formular ausfüllen und absenden
+python selenium_tester.py list-cookies           # Cookies der Standardseite anzeigen
+python selenium_tester.py keypress Hallo         # Text in ein Eingabefeld tippen
+python selenium_tester.py checkbox               # Checkboxen der Standardseite auslesen
+python selenium_tester.py slider                 # Slider auf Maximum bewegen und Wert ausgeben
 ```
