@@ -32,9 +32,6 @@ python selenium_tester.py slider                 # Slider auf Maximum bewegen un
 ```
 
 ## Kontrollfluss
+<img width="1257" height="1122" alt="Kontrollfluss" src="https://github.com/user-attachments/assets/a77ad327-44a0-40ff-8d78-a287156abc7c" />
 
-![Kontrollfluss](https://github.com/user-attachments/assets/a8a365a3-a91e-43aa-b301-beeda8450d84)
 
-## Architekturübersicht
-
-![Architekturübersicht](https://github.com/user-attachments/assets/2414a6cf-2c5c-4b44-a98b-183a843abbe3)
