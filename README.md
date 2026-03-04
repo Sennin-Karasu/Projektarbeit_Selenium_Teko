@@ -30,8 +30,8 @@ python selenium_tester.py keypress Hallo         # Text in ein Eingabefeld tippe
 python selenium_tester.py checkbox               # Checkboxen der Standardseite auslesen
 python selenium_tester.py slider                 # Slider auf Maximum bewegen und Wert ausgeben
 ```
-##Kontrollfluss
+## Kontrollfluss
 <img width="1151" height="1070" alt="Kontrollfluss" src="https://github.com/user-attachments/assets/a8a365a3-a91e-43aa-b301-beeda8450d84" />
 
-##Architekturübersicht
+## Architekturübersicht
 <img width="965" height="920" alt="Architekturübersicht" src="https://github.com/user-attachments/assets/2414a6cf-2c5c-4b44-a98b-183a843abbe3" />
